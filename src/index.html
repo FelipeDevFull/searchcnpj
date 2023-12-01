@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+  <html lang="pt-br">
+    <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>SearchCnpj</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <link rel="stylesheet" href="../dist/output.css">
+      <script src="js/scripts.js" defer></script>
+      
+      <style>
+        .container_info{
+          max-height: 5px;
+          transition: height 3s;
+          -webkit-transition: max-height 3s; 
+          -moz-transition: max-height 3s; 
+          -ms-transition: max-height 3s; 
+          -o-transition: max-height 3s; 
+          transition: max-height 3s;  
+          overflow: hidden;
+          display: none;
+        }
+        .container_info_open
+        {
+          max-height: 500px;
+          padding: 5px;
+          display: block;
+        }
+        .hide {
+          display: none !important;
+        }
+        #loader i {
+          animation: rotate 1.5s linear infinite;
+        }
+        @keyframes rotate {
+          100% {transform:rotate(360deg)}
+        }
+      </style>      
+    </head>
+  <body>
+    <section class="min-h-screen bg-indigo-800 pb-6">
+      <header>
+        <h2 class="font-Source-Sans-Pro font-semibold text-5xl text-center text-white pt-8 md:pt-24 pb-8">SearchCnpj</h2>
+      </header>
+      <p class="font-Source-Sans-Pro text-center text-white">Para garantir o funcionamento adequado dos nossos recursos estabelecemos limites para a API.</p>
+      <p class="font-Source-Sans-Pro text-center text-white pb-8">**50 requisições por dia por ip para o buscarcnpj(api)</p>
+      <div class="w-11/12 sm:w-96 md:w-3/5 mx-auto bg-white p-2 block border rounded-lg">
+        <form id="FormCnpj">   
+          <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+          <div class="relative">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+              </div>
+              <input type="text" id="InputCnpj" name="InputCnpj" value="" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" autocomplete="off" placeholder="Insira apenas os números">
+              <button type="submit" id="ButtonSendCnpj" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Buscar</button>      
+            </div>
+            <p class="validate text-rose-600" id="validate"></p>
+        </form>
+      </div>
+      
+      <div id="loader" class="hide text-center text-white text-3xl py-3.5"><i class="fa-solid fa-spinner"></i></div>
+
+      <div id="container_info" class="container_info w-11/12 sm:w-96 md:w-3/5 mx-auto bg-white border rounded-lg mt-6">
+        <P class="font-Source-Sans-Pro text-gray-500 text-sm pb-1 border-b">RAZÃO SOCIAL:          <span id="RAZAO_SOCIAL" class="text-cyan-600 font-semibold text-sm"></span></P>
+        <P class="font-Source-Sans-Pro text-gray-500 text-sm pb-1 border-b">CNPJ:                       <span id="CNPJ" class="text-cyan-600 font-semibold text-sm"></span></P>
+        <P class="font-Source-Sans-Pro text-gray-500 text-sm pb-1 border-b">STATUS:                     <span id="STATUS" class="text-cyan-600 font-semibold text-sm"></span></P>
+        <P class="font-Source-Sans-Pro text-gray-500 text-sm pb-1 border-b">CNAE PRINCIPAL DESCRIÇÃO:   <span id="CNAE_PRINCIPAL_DESCRICAO" class="text-cyan-600 font-semibold text-sm"></span></P>
+        <P class="font-Source-Sans-Pro text-gray-500 text-sm pb-1 border-b">CEP:                        <span id="CEP" class="text-cyan-600 font-semibold text-sm"></span></P>
+        <P class="font-Source-Sans-Pro text-gray-500 text-sm pb-1 border-b">DATA ABERTURA:              <span id="DATA_ABERTURA" class="text-cyan-600 font-semibold text-sm"></span></P>
+        <P class="font-Source-Sans-Pro text-gray-500 text-sm pb-1 border-b">DDD:                        <span id="DDD" class="text-cyan-600 font-semibold text-sm"></span></P>
+        <P class="font-Source-Sans-Pro text-gray-500 text-sm pb-1 border-b">TELEFONE:                   <span id="TELEFONE" class="text-cyan-600 font-semibold text-sm"></span></P>
+        <P class="font-Source-Sans-Pro text-gray-500 text-sm pb-1 border-b">EMAIL:                      <span id="EMAIL" class="text-cyan-600 font-semibold text-sm"></span></P>
+        <P class="font-Source-Sans-Pro text-gray-500 text-sm pb-1 border-b">LOGRADOURO:                 <span id="LOGRADOURO" class="text-cyan-600 font-semibold text-sm"></span></P>
+        <P class="font-Source-Sans-Pro text-gray-500 text-sm pb-1 border-b">BAIRRO:                     <span id="BAIRRO" class="text-cyan-600 font-semibold text-sm"></span></P>
+        <P class="font-Source-Sans-Pro text-gray-500 text-sm pb-1 border-b">MUNICIPIO:                  <span id="MUNICIPIO" class="text-cyan-600 font-semibold text-sm"></span></P>
+        <P class="font-Source-Sans-Pro text-gray-500 text-sm pb-1 border-b">UF:                         <span id="UF" class="text-cyan-600 font-semibold text-sm"></span></P>
+      </div>  
+    </section>     
+  </body>
+</html>
