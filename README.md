@@ -19,7 +19,7 @@ A SearchCnpj é uma aplicação de busca de informações mediante o número do 
  3. Html
 
 ## 🌐 Acessar o projeto.
-### [SearchCnpj](https://felipedev-portfolio.vercel.app/projetos/searchcnpj/index.html)
+### [SearchCnpj](https://felipefreela-portfolio.vercel.app/projetos/searchcnpj/src/index.html)
 
 ## 👨‍💻 Como executar o projeto.
 
@@ -28,5 +28,5 @@ A SearchCnpj é uma aplicação de busca de informações mediante o número do 
 ```sh
 git clone git@github.com:FelipeDevFull/searchcnpj.git
 ```
-### 2. clique no arquivo "index.html" dentro da pasta "searchcnpj".
+### 2. clique no arquivo "index.html" dentro da pasta "searchcnpj/src/".
 
